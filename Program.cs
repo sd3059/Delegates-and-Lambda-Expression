@@ -5,43 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Delegates___Lambda_Expression
-{
-    /* Now we will discuss about Anonymous Function or Anonymous Method, an anonymous function is one where instead of a 
-       method getting called inside the class, it can directly be called in the main function with the help of a delegate,
-       The anonymous method does not have any name, and using the delegate keyword it is declared in the main function 
-    
-       Some features of anonymous function:
-       1) The anonymous function is used for small codes.
-       2) The anonymous function does not use access specifiers and is not a static and instance member.
-       3) Also,the anonymous function has no return type, and is dependent on the return type of the delegate directly.
-       4) Also the anonymous function cannot contain jump statements like goto,continue or break statements.
-       5) Also the anonymous function can be passed as a parameter.*/
-
+{ 
 
     public delegate void MyDelegate(int num); // Here I have declared a delegate, by defining a name as MyDelegate and the parameter I have set as of integer datatype 
     class Program
     { 
-        //public static void MyMethod(int a) // Here, inside the class named Program I have declared a method named as MyMethod by defining a datatype of type integer 
-        //{
-        //    a += 10;   // After invoking the value from the main function which is 510, the instructions inside the MyMethod() , will execute and return the value of a  
-        //    Console.WriteLine(a); // Final value of a is achieved as 520
+        public static void MyMethod(MyDelegate del, int a) // Here in the MyMethod function we are declaring del as a parameter of the MyDelegates, and the function or method of it's reference is  an anonymous function
+        {
+            a += 10; // Instruction defined and anything the value of a is, it will be incremented with 10    
 
-        //} 
+            del.Invoke(a); // Here, the value of a will be invoked in the anonymous function and further execution will be done inside the anonymous function as per the value recieved
+
+        } 
     
         static void Main(string[] args) // Main Function
         {
-            MyDelegate objd2 = delegate(int a) // Here the Anonymous Function has been declared and a parameter as that of the same type as the delegate has been set
-            {
-                a += 10; // Inside the anonymous function, the instructions are defined  
-                
-                Console.WriteLine(a);  // Final value is being printed
-
-                // return a; /* When a return type is defined in the delegate */
-            };
-            // Console.WriteLine(objd2.Invoke(5)); /* When a return type is defined in the delegate */
-
-            objd2.Invoke(5); // Here, the value of the delegate is being passed and the anonymous function is being used as a reference
+            Program.MyMethod(delegate (int b) { b += 10; Console.WriteLine(b); }, 5); // Here we can observe that the anonymous fuction has been passed as a parameter in the MyMethod Function
+            Console.ReadLine();
         }
-
+        
     }
 }
